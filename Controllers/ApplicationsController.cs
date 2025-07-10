@@ -42,7 +42,8 @@ namespace TrackJobAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, JobApplication app)
         {
-            if (id != app.Id) return BadRequest();
+            if (id != app.Id) return BadRequest("ID mismatch");
+            
             await _repo.UpdateAsync(app);
             await _repo.SaveAsync();
             return NoContent();
@@ -51,6 +52,9 @@ namespace TrackJobAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
+            var existing = await _repo.GetByIdAsync(id);
+            if (existing == null) return NotFound();
+
             await _repo.DeleteAsync(id);
             await _repo.SaveAsync();
             return NoContent();

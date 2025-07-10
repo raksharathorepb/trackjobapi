@@ -7,6 +7,12 @@ Clone the repository
 git clone https://github.com/raksharathorepb/trackjobapi.git
 cd trackjobapi
 
+# Environment setup
+ Node version
+ v20 
+ .NET SDK (7.0 or 8.0) 
+
+
 # Restore dependencies
 dotnet restore
 
